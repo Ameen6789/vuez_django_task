@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body class="min-vh-100">
+    <nav class="nav bg-primary py-3 px-2 px-lg-5">
+        <ul class="nav h-100">
+            <li class="nav-item fs-5 h-100"><a href="/" class="text-white text-decoration-none fw-semibold h-100">EMPLOYEE MANAGEMENT SYSTEM</a></li>
+        </ul>
+    </nav>
+    <div class="d-flex  justify-content-center align-items-center mt-5 pt-5 w-100 px-2 px-lg-5">
+        <form action="/" method="post" id="login-form" class=" d-flex flex-column align-items-center justify-content-center bg-white px-4 py-5 rounded-2 shadow-sm">
+            {% csrf_token %}
+            <h1 class="mb-4">Login</h1>
+            <div class="w-100 d-flex align-items-center justify-content-start">
+                <p class="mb-1 text-danger " id="login-error"> {{ msg }}</p>
+            </div>
+
+            <div class="form-group mb-2 p-0 w-100">
+                <label for="email" class="fw-semibold mb-1">Email</label>
+                <input type="email" name="email" class="form-control w-100 " required>
+            </div>
+            <div class="form-group mb-3 w-100">
+                <label for="email" class="fw-semibold mb-1">password</label>
+                <input type="password" name="password" class="form-control w-100" required>
+            </div>
+            <p>Dont have an account? <a href="/signup" class="text-decoration-none">Sign up</a></p>
+            <input type="submit" class="btn btn-primary w-100 fw-semibold mt-2 ">
+        </form>
+    </div>
+    
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#login-form").submit(function(event){
+            event.preventDefault();
+            $.ajax({
+            url:"{% url '' %}",
+            type:"POST",
+            data:$(this).serialize(),
+            success:function(response){
+                if (response.success){
+                    if (response["usetype"]=="admin"){
+                        window.location.href="{% url 'view_employee' %}"
+                    }
+                    else{
+                        window.location.href="{% url 'employee_profile' %}"
+                    }
+                    
+                }
+                
+            },
+
+            error:function(response){
+                $("#login-error").empty()
+                $("#login-error").append("Invalid Login")
+
+            }
+        })
+        })
+        
+    })
+</script>
+</html>

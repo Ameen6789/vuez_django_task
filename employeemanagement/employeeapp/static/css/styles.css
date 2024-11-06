@@ -1,0 +1,41 @@
+body{
+    background-color: #F5F5F5
+}
+.nav-link:hover{
+    background-color: rgba(0, 145, 255, 0.575);
+
+}
+.nav-item{
+    font-size: 17px;
+}
+
+#registration-form,#update-form{
+    width:510px
+}
+#login-form{
+    width: 380px;
+}
+
+@media(max-width:992px){
+    
+    .table-container{
+        overflow-x: scroll;
+        scrollbar-width: thin;
+    }
+    
+    
+}
+@media(max-width:510px){
+    
+    #registration-form,#update-form{
+        width: 100%;
+    }
+}
+
+@media(max-width:380px){
+    #login-form{
+        width: 380px;
+    }
+}
+
+

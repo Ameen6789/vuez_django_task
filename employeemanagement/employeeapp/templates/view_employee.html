@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body class="min-vh-100">
+    <nav class="nav bg-primary align-items-center px-2 px-lg-5">
+        <ul class="nav h-auto">
+            <li class="nav-item fs-4 my-2 py-1"><a href="/" class="text-white text-decoration-none fw-semibold ">EMPLOYEE MANAGEMENT SYSTEM</a></li>
+        </ul>
+        <ul class="nav ms-auto ">
+            <li class="nav-item "><a href="/view_employee" class="nav-link text-white text-decoration-none fw-medium">View Employees</a></li>
+
+            <li class="nav-item "><a href="/logouts" class="nav-link text-white text-decoration-none fw-medium ">Logout</a></li>
+        </ul> 
+        
+    </nav>
+    <h2 class="mt-4 mb-4 mx-5">Employee Details</h2>
+    <div class="table-container mx-2 mx-lg-5">
+        
+        <table class="table table-bordered table-striped w-100 shadow-sm">
+            <thead class="">
+                <tr>
+                    <th class="mx-2"><p class="mb-0 px-2">Employee ID</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Employee Name</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Email</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Phone Number</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Department</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Address</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Joining Date</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Approve</p></th>
+                    <th class="px-2"><p class="mb-0 px-2">Action</p></th>
+                </tr> 
+                
+            </thead>
+            <tbody>
+                {% for emp in employee_data %}
+                <tr>
+                    <td class="align-middle"><p class="mb-0 px-2 h-100">{{ emp.id }}</p> </td>
+                    <td class="align-middle"><p class="mb-0 px-2">{{ emp.user.first_name | title}} {{ emp.user.last_name| title }}</p></td>
+                    <td class="align-middle"><p class="mb-0 px-2">{{ emp.user.email }}</p></td>
+                    <td class="align-middle"><p class="mb-0 px-2">{{ emp.phone_number }}</p></td>
+                    <td class="align-middle"><p class="mb-0 px-2">{{ emp.get_department_display }}</p>
+                    <td class="align-middle"><p class="mb-0 px-2">{{ emp.address| title }}</p></td>
+                    <td class="align-middle"><p class="mb-0 px-2">{{ emp.user.date_joined | date:'M d Y' }}</p></td>
+                    {% if emp.user.is_active == 1 %}
+                    <td class="align-middle"><p class="mb-0 px-2">Approved</p> </td>
+
+                    {% else %}
+                    <td class="align-middle"><a href="/approve_employee/{{ emp.user.id }}" class="px-2 text-decoration-none text-primary">Approve</a> </td>
+                    {% endif%}
+                    <td class="px-2">
+                        <a href="/edit_employee/{{ emp.user.id }}" class="me-2   text-decoration-none ">
+                            <button class="btn btn-success p-2 mb-2 mb-xl-0">
+                                <img src="{% static 'images/edit_icon.png' %}" alt="" width="24px" height="24px">
+                            </button>
+                        </a>
+                        <a href="/delete_employee/{{ emp.user.id }}">
+                            <button class="btn btn-danger p-1">
+                                <img src="{% static 'images/delete_icon.png' %}" alt="" width="32px" height="34px">
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+                
+        </table>
+
+    </div>
+</body>
+</html>
+
+

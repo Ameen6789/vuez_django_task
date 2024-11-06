@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body class="min-vh-100 ">
+    <nav class="nav bg-primary align-items-center px-2 px-lg-5">
+        <ul class="nav  h-auto">
+            <li class="nav-item fs-4 my-2 py-1"><a href="/" class="text-white text-decoration-none fw-semibold ">EMPLOYEE MANAGEMENT SYSTEM</a></li>
+        </ul>
+        <ul class="nav ms-auto ">
+            
+
+            <li class="nav-item "><a href="/logouts" class="nav-link text-white text-decoration-none fw-medium ">Logout</a></li>
+        </ul> 
+        
+    </nav>
+    
+    <div class="d-flex align-items-center flex-column mx-2 mx-lg-5 justify-content-center">
+        <h2 class="mt-4 mb-4">Employee Profile</h2>
+        <div class="py-5 px-4 rounded-2 bg-white shadow-sm">
+            <table>
+                <tr>
+                    <th><p class="mb-3 px-3 px-lg-5 fs-6 ">Employee ID:</p></th>
+                    <td><p class="mb-3 px-3 px-lg-5 fs-6 ">{{ employee.id }}</p></td>
+                </tr>
+                <tr>
+                    <th><p class="mb-3 px-3 px-lg-5 fs-6 ">Employee Name:</p></th>
+                    <td><p class="mb-3 px-3 px-lg-5 fs-6 ">{{ employee.user.first_name | title}} {{ employee.user.last_name| title }}</p></td>
+                </tr>
+                <tr>
+                    <th><p class="mb-3 px-3 px-lg-5 fs-6 ">Email:</p></th>
+                    <td><p class="mb-3 px-3 px-lg-5 fs-6 ">{{ employee.user.email }} </p></td>
+                </tr>
+                <tr>
+                    <th><p class="mb-3 px-3 px-lg-5 fs-6 ">Phone:</p></th>
+                    <td><p class="mb-3 px-3 px-lg-5 fs-6 ">{{ employee.phone_number }}</p></td>
+                </tr>
+                <tr>
+                    <th><p class="mb-3 px-3 px-lg-5 fs-6 ">Department:</p></th>
+                    <td><p class="mb-3 px-3 px-lg-5 fs-6 ">{{ employee.get_department_display }}</p></td>
+                </tr>
+
+                <tr>
+                    <th><p class="mb-3 px-3 px-lg-5 fs-6 ">Address:</p></th>
+                    <td><p class="mb-3 px-3 px-lg-5 fs-6 ">{{ employee.address| title }}</p></td>
+                </tr>
+                <tr>
+                    <th><p class="mb-3 px-3 px-lg-5 fs-6 ">Joining Date:</p></th>
+                    <td><p class="mb-3 px-3 px-lg-5 fs-6 ">{{ employee.user.date_joined | date:'Y-m-d' }}</p></td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
+
+
