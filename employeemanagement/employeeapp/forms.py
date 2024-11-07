@@ -1,15 +1,15 @@
 from .models import Employee,User
 from django import forms
 class UserForm(forms.ModelForm):
-    confirm_password=forms.CharField(required=False,max_length=100,widget=forms.PasswordInput(attrs={"class":"form-control"}))
-    password=forms.CharField(required=False,max_length=100,widget=forms.PasswordInput(attrs={"class":"form-control"}))
-    email=forms.EmailField(required=False,max_length=100,widget=forms.EmailInput(attrs={"class":"form-control"}))
+    confirm_password=forms.CharField(required=False,max_length=100,widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Confirm Password"}))
+    password=forms.CharField(required=False,max_length=100,widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Enter Password"}))
+    email=forms.EmailField(required=False,max_length=100,widget=forms.EmailInput(attrs={"class":"form-control","placeholder":"Enter Email"}))
     class Meta:
         model=User
         fields=["first_name","last_name","email","password"]
         widgets={
-            "first_name":forms.TextInput(attrs={"class":"form-control"}),
-            "last_name":forms.TextInput(attrs={"class":"form-control"}),
+            "first_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter First Name"}),
+            "last_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Last Name"}),
         }
     def clean(self):
         cleaned_data=super().clean()
@@ -32,9 +32,9 @@ class EmployeeForm(forms.ModelForm):
         model=Employee
         fields=["phone_number","department","address"] 
         widgets={
-            "phone_number":forms.NumberInput(attrs={"class":"form-control"}),
-            "department":forms.Select(attrs={"class":"form-select"}),
-            "address":forms.Textarea(attrs={"class":"form-control","rows":4})
+            "phone_number":forms.NumberInput(attrs={"class":"form-control","placeholder":"Enter Phone Number"}),
+            "department":forms.Select(attrs={"class":"form-select","placeholder":"Enter Department"}),
+            "address":forms.Textarea(attrs={"class":"form-control","rows":4,"placeholder":"Enter Address"})
         }
     def clean(self):
         cleaned_data=super().clean()
