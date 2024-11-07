@@ -17,6 +17,7 @@ def home(request):
         if user is not None:
             if user.is_superuser==1:
                 login(request,user)
+                print("adminssssssssssssssssssssssssssss")
                 return JsonResponse({'success':True,'usertype':'admin'},status=200)
 
             elif user.is_staff==1:

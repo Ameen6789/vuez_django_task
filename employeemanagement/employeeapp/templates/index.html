@@ -48,7 +48,7 @@
             data:$(this).serialize(),
             success:function(response){
                 if (response.success){
-                    if (response["usetype"]=="admin"){
+                    if (response["usertype"]=="admin"){
                         window.location.href="{% url 'view_employee' %}"
                     }
                     else{
